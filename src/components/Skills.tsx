@@ -20,13 +20,13 @@ const Skills: React.FC = () => {
     {
       title: "Backend Development",
       icon: <Server className="w-8 h-8" />,
-      skills: ["Node.js", "Python", "PHP"],
+      skills: [ "Python", "PHP"],
       color: "from-blue-500 to-purple-500"
     },
     {
       title: "Database",
       icon: <Database className="w-8 h-8" />,
-      skills: ["MongoDB", "MySQL"],
+      skills: [ "MySQL"],
       color: "from-green-500 to-blue-500"
     },
     {
@@ -38,7 +38,7 @@ const Skills: React.FC = () => {
     {
       title: "Development Tools",
       icon: <Palette className="w-8 h-8" />,
-      skills: ["Git", "VS Code", "Chrome DevTools", "NPM"],
+      skills: ["Git","Github", "VS Code", "Chrome DevTools", "NPM"],
       color: "from-pink-500 to-purple-500"
     },
     {

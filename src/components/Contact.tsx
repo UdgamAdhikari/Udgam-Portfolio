@@ -16,24 +16,35 @@ const Contact: React.FC = () => {
     message: ''
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-
-    setFormErrors({
-      ...formErrors,
-      [e.target.name]: ''
-    });
+  // ✅ Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // ✅ Handle form submit
+  const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const nameRegex = /^[A-Za-z\s]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     const errors = {
-      name: formData.name ? '' : 'Name is required',
-      email: formData.email ? '' : 'Email is required',
+      name: !formData.name
+        ? 'Name is required'
+        : !nameRegex.test(formData.name)
+        ? 'Name should not contain numbers'
+        : '',
+
+      email: !formData.email
+        ? 'Email is required'
+        : !emailRegex.test(formData.email)
+        ? 'Invalid email format'
+        : '',
+
       subject: formData.subject ? '' : 'Subject is required',
       message: formData.message ? '' : 'Message is required',
     };
@@ -45,15 +56,25 @@ const Contact: React.FC = () => {
 
     console.log('Form submitted:', formData);
 
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    });
+
+    alert('Message sent successfully!');
   };
 
   const contactInfo = [
-    {
-      icon: <Mail className="w-6 h-6" />,
-      title: "Email",
-      value: "udgamadhikari26@gmail.com",
-      href: "udgamadhikari26@gmail.com"
-    },
+{
+  icon: <Mail className="w-6 h-6" />,
+  title: "Email",
+  value: "udgamadhikari26@gmail.com",
+  href: "mailto:udgamadhikari26@gmail.com"
+},
+
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Phone",
@@ -95,21 +116,17 @@ const Contact: React.FC = () => {
     <section id="contact" className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Get In Touch
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Get In Touch</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             I'm always interested in new opportunities and collaborations. Let's discuss how we can work together.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16">
-    
+     
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Let's Start a Conversation
-              </h3>
+              <h3 className="text-2xl font-bold text-white mb-6">Let's Start a Conversation</h3>
               <p className="text-lg text-gray-300 mb-8">
                 Whether you have a project in mind, want to collaborate, or just want to say hello, 
                 I'd love to hear from you. I typically respond within 24 hours.
@@ -118,7 +135,7 @@ const Contact: React.FC = () => {
 
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
-                <a 
+                <a
                   key={index}
                   href={info.href}
                   className="flex items-center space-x-4 p-4 rounded-xl hover:bg-gray-800 transition-colors duration-200 group"
@@ -138,7 +155,7 @@ const Contact: React.FC = () => {
               <h4 className="font-semibold text-white mb-4">Follow Me</h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
-                  <a 
+                  <a
                     key={index}
                     href={social.href}
                     target="_blank"
@@ -153,87 +170,68 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-
           <div className="relative">
             <div className="absolute -inset-0.5  rounded-2xl blur opacity-25"></div>
             <div className="relative bg-gray-800 p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Send Me a Message
-              </h3>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <h3 className="text-2xl font-bold text-white mb-6">Send Me a Message</h3>
+
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                      Your Name
-                    </label>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
                     <input
                       type="text"
                       id="name"
                       name="name"
                       value={formData.name}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 text-white placeholder-gray-400"
                       placeholder="Name"
                     />
-                    {formErrors.name && (
-                      <p className="text-sm text-red-500 mt-1">{formErrors.name}</p>
-                    )}
+                    {formErrors.name && <p className="text-sm text-red-500 mt-1">{formErrors.name}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                      Your Email
-                    </label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Your Email</label>
                     <input
                       type="email"
                       id="email"
                       name="email"
                       value={formData.email}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 text-white placeholder-gray-400"
                       placeholder="udgam@gmail.com"
                     />
-                    {formErrors.email && (
-                      <p className="text-sm text-red-500 mt-1">{formErrors.email}</p>
-                    )}
+                    {formErrors.email && <p className="text-sm text-red-500 mt-1">{formErrors.email}</p>}
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                    Subject
-                  </label>
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">Subject</label>
                   <input
                     type="text"
                     id="subject"
                     name="subject"
                     value={formData.subject}
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 text-white placeholder-gray-400"
                     placeholder="Project Collaboration"
                   />
-                  {formErrors.subject && (
-                    <p className="text-sm text-red-500 mt-1">{formErrors.subject}</p>
-                  )}
+                  {formErrors.subject && <p className="text-sm text-red-500 mt-1">{formErrors.subject}</p>}
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                    Message
-                  </label>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Message</label>
                   <textarea
                     id="message"
                     name="message"
                     value={formData.message}
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     rows={6}
                     className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 text-white placeholder-gray-400 resize-none"
                     placeholder="Tell me about your project..."
                   />
-                  {formErrors.message && (
-                    <p className="text-sm text-red-500 mt-1">{formErrors.message}</p>
-                  )}
+                  {formErrors.message && <p className="text-sm text-red-500 mt-1">{formErrors.message}</p>}
                 </div>
 
                 <button

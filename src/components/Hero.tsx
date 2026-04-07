@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative bg-black px-4 sm:px-6 lg:px-8">
-      {/* Background gradient blur elements */}
+
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-pink-900/20"></div>
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-full blur-3xl animate-pulse"></div>
@@ -26,8 +26,8 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="relative z-10 w-full max-w-7xl text-center space-y-10 pt-12 pb-28">
-        {/* Profile Image */}
-        <div className="flex justify-center">
+
+        <div className="flex justify-center mt-20">
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gray-800">
             <img
               src="src/Photo.jpg"
@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Heading & Description */}
+    
         <div className="space-y-4">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
             Hi, I'm <span className="text-purple-400">Udgam Adhikari</span>
@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
           </p>
         </div>
 
-        {/* Buttons */}
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={scrollToProjects}
@@ -56,13 +56,14 @@ const Hero: React.FC = () => {
             View My Work
           </button>
 
-          <a
-            href=""
-            download="UdgamAdhikari_CV.pdf"
+              {/* <a
+            href="/UdgamAdhikari_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="border-2 border-gray-600 text-gray-300 px-8 py-3 rounded-full font-semibold hover:border-purple-400 hover:text-purple-400 transition-all duration-300"
           >
-            Download CV
-          </a>
+            View CV
+          </a> */}
         </div>
 
         <div className="flex justify-center gap-4 pl-9 pt-4">
