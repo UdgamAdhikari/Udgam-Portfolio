@@ -4,6 +4,21 @@ import { ExternalLink, Github, ArrowRight } from "lucide-react";
 const Projects: React.FC = () => {
   const projects = [
     {
+      title: "Pharmacy Management System",
+      description:
+        "A real-world pharmacy management system built with Next.js and TypeScript featuring role-based access for Admin and Super Admin, inventory management, medicine catalog handling, purchase and sales workflows, authentication, dashboard analytics, and scalable API integration. Designed with reusable components, data tables, modals, form validation, and production-level architecture for enterprise-style workflows.",
+      image: "/pharmacy.png",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "React Query",
+        "Tailwind CSS",
+        "Shadcn UI",
+      ],
+      githubUrl: "https://github.com/your-repo",
+      featured: true,
+    },
+    {
       title: "Heart Disease Prediction System",
       description:
         "This is a Heart Disease Prediction System built with machine learning to predict the risk of heart disease based on user medical data. It features secure authentication for users, allowing personalized assessments. The system provides fast and accurate predictions and helps users understand their health status. It can be used as a decision-support tool for early detection and preventive care",
@@ -23,7 +38,6 @@ const Projects: React.FC = () => {
       technologies: ["React", "CSS", "Firebase"],
 
       githubUrl: "https://github.com/UdgamAdhikari/Ecommerce-Website",
-      featured: true,
     },
     {
       title: "Portfolio Website",
@@ -44,22 +58,6 @@ const Projects: React.FC = () => {
       technologies: ["React", "Tailwind CSS", "JavaScript", "Shadcn"],
       githubUrl: "https://github.com/UdgamAdhikari/AdminDashboard",
     },
-
-{
-  title: "Pharmacy Management System",
-  description:
-    "A real-world pharmacy management system built with Next.js and TypeScript featuring role-based access, inventory management, medicine catalog workflows, dashboard analytics, and scalable API integration.",
-  image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1200&q=80",
-  technologies: [
-    "Next.js",
-    "TypeScript",
-    "React Query",
-    "Tailwind CSS",
-    "Shadcn UI"
-  ],
-  githubUrl: "https://github.com/your-repo",
-  featured: true
-},
   ];
 
   const featuredProjects = projects.filter((project) => project.featured);
