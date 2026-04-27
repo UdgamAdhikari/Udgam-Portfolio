@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
         <div className="flex justify-center mt-20">
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gray-800">
             <img
-              src="src/Photo.jpg"
+              src="/Photo.jpg"
               alt="Udgam Adhikari"
               className="w-full h-full object-cover rounded-full"
             />

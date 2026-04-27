@@ -3,21 +3,16 @@ import { ExternalLink, Github, ArrowRight } from "lucide-react";
 
 const Projects: React.FC = () => {
   const projects = [
-
-
-        {
+    {
       title: "Heart Disease Prediction System",
       description:
         "This is a Heart Disease Prediction System built with machine learning to predict the risk of heart disease based on user medical data. It features secure authentication for users, allowing personalized assessments. The system provides fast and accurate predictions and helps users understand their health status. It can be used as a decision-support tool for early detection and preventive care",
-      image:
-        "src/components/heart.png",
+      image: "/heart.png",
       technologies: ["React", "Flask", "CSS", "HTML"],
       liveUrl: "#",
-      githubUrl:
-        "https://github.com/UdgamAdhikari/Heart-Diseases-System",
+      githubUrl: "https://github.com/UdgamAdhikari/Heart-Diseases-System",
       featured: true,
     },
- 
 
     {
       title: "Ecommerce Website",
@@ -41,29 +36,23 @@ const Projects: React.FC = () => {
         "https://github.com/UdgamAdhikari/Udgam-Portfolio/tree/main/src",
     },
 
-      {
+    {
       title: "Dashboard",
       description:
         "A responsive dashboard with different functional features using shadcn components",
-      image:
-        "/image.png",
-      technologies: ["React", "Tailwind CSS", "JavaScript","Shadcn"],
-      githubUrl:
-        "https://github.com/UdgamAdhikari/AdminDashboard",
+      image: "/image.png",
+      technologies: ["React", "Tailwind CSS", "JavaScript", "Shadcn"],
+      githubUrl: "https://github.com/UdgamAdhikari/AdminDashboard",
     },
-    
-    
-  
 
-     {
+    {
       title: "Muktinath Itech Website",
       description:
         "Muktinath Itech Website is a modern, responsive website built for Muktinath Krishi Company. The site features a clean and consistent design with support for dark mode, enhancing user comfort and accessibility in low-light environments. It includes an interactive contact form, an embedded Google Map for location reference, and links to all major social media platforms. The website is fully optimized for both desktop and mobile users, ensuring a seamless experience across all devices.",
-      image: "src/Muktinath Logo.jpg",
+      image: "/Muktinath Logo.jpg",
       technologies: ["HTML", " Tailwind CSS", "React"],
 
       githubUrl: "https://github.com/UdgamAdhikari/Muktinath-Itech-Website",
-     
     },
   ];
 
@@ -103,7 +92,8 @@ const Projects: React.FC = () => {
                     <div className="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="flex space-x-3">
-                        <a target="_blank"
+                        <a
+                          target="_blank"
                           href={project.githubUrl}
                           className="flex items-center space-x-2 bg-gray-900 text-white px-4 py-2 rounded-lg font-semibold  transition-colors"
                         >
