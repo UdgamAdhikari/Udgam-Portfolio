@@ -7,7 +7,7 @@ const Projects: React.FC = () => {
   title: "Pharmacy Management System",
   description:
     "A real-world pharmacy management system built with Next.js and TypeScript featuring role-based access, inventory management, medicine catalog workflows, dashboard analytics, and scalable API integration.",
-  image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1200&q=80",
+  image: "/image copy.png",
   technologies: [
     "Next.js",
     "TypeScript",
