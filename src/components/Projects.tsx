@@ -45,15 +45,21 @@ const Projects: React.FC = () => {
       githubUrl: "https://github.com/UdgamAdhikari/AdminDashboard",
     },
 
-    {
-      title: "Muktinath Itech Website",
-      description:
-        "Muktinath Itech Website is a modern, responsive website built for Muktinath Krishi Company. The site features a clean and consistent design with support for dark mode, enhancing user comfort and accessibility in low-light environments. It includes an interactive contact form, an embedded Google Map for location reference, and links to all major social media platforms. The website is fully optimized for both desktop and mobile users, ensuring a seamless experience across all devices.",
-      image: "/Muktinath Logo.jpg",
-      technologies: ["HTML", " Tailwind CSS", "React"],
-
-      githubUrl: "https://github.com/UdgamAdhikari/Muktinath-Itech-Website",
-    },
+{
+  title: "Pharmacy Management System",
+  description:
+    "A real-world pharmacy management system built with Next.js and TypeScript featuring role-based access, inventory management, medicine catalog workflows, dashboard analytics, and scalable API integration.",
+  image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1200&q=80",
+  technologies: [
+    "Next.js",
+    "TypeScript",
+    "React Query",
+    "Tailwind CSS",
+    "Shadcn UI"
+  ],
+  githubUrl: "https://github.com/your-repo",
+  featured: true
+},
   ];
 
   const featuredProjects = projects.filter((project) => project.featured);
