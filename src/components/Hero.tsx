@@ -86,12 +86,12 @@ const Hero: React.FC = () => {
 
 
         <div className="mt-16">
-          <button
+          {/* <button
             onClick={scrollToAbout}
             className="text-gray-400 hover:text-purple-400 animate-bounce"
           >
             <ArrowDown size={28} />
-          </button>
+          </button> */}
         </div>
       </div>
     </section>
