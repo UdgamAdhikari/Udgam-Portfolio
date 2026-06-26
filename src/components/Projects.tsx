@@ -3,20 +3,35 @@ import { ExternalLink, Github, ArrowRight } from "lucide-react";
 
 const Projects: React.FC = () => {
   const projects = [
+    {
+      title: "Pharmacy Management System",
+      description:
+        "A real-world pharmacy management system built with Next.js and TypeScript featuring role-based access, inventory management, medicine catalog workflows, dashboard analytics, and scalable API integration.",
+      image: "/image copy.png",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "React Query",
+        "Tailwind CSS",
+        "Shadcn UI",
+      ],
+      githubUrl: "https://github.com/your-repo",
+      featured: true,
+    },
 {
-  title: "Pharmacy Management System",
+  title: "Mobile Inventory Management System",
   description:
-    "A real-world pharmacy management system built with Next.js and TypeScript featuring role-based access, inventory management, medicine catalog workflows, dashboard analytics, and scalable API integration.",
-  image: "/image copy.png",
+    "A modern inventory management system for mobile phone businesses built with Next.js and TypeScript. It includes product management, stock tracking, purchase and sales workflows, supplier and customer management, dashboard analytics, role-based access control, and scalable API integration for efficient inventory operations.",
+  image: "/mobile.png",
   technologies: [
     "Next.js",
     "TypeScript",
     "React Query",
     "Tailwind CSS",
-    "Shadcn UI"
+    "Shadcn UI",
   ],
   githubUrl: "https://github.com/your-repo",
-  featured: true
+  featured: true,
 },
     {
       title: "Heart Disease Prediction System",
