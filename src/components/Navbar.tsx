@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks, profile } from "../data/content";
+import { lenis } from "../lib/motion";
 import Magnetic from "./Magnetic";
 
 export default function Navbar() {
@@ -9,7 +10,11 @@ export default function Navbar() {
 
   const go = (href: string) => {
     setOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    if (lenis) {
+      lenis.scrollTo(href);
+    } else {
+      document.querySelector(href)?.scrollIntoView();
+    }
   };
 
   return (

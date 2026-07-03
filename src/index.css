@@ -3,10 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
+  /* No `scroll-behavior: smooth` here — it fights Lenis and freezes scrolling.
+     Smooth scrolling (incl. anchor links) is handled by Lenis in App.tsx. */
   body {
     @apply bg-ink text-white antialiased;
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -113,9 +111,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   .aurora span {
     animation: none;
   }

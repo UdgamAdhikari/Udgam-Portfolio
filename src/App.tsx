@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import { scrollState, prefersReducedMotion } from "./lib/motion";
+import { scrollState, setLenis, prefersReducedMotion } from "./lib/motion";
 import Preloader from "./components/Preloader";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
@@ -31,6 +31,7 @@ function App() {
       lenis.on("scroll", ScrollTrigger.update);
       gsap.ticker.add((time) => lenis!.raf(time * 1000));
       gsap.ticker.lagSmoothing(0);
+      setLenis(lenis);
     }
 
     // Whole-page scroll progress feeds the persistent 3D scene
@@ -45,6 +46,7 @@ function App() {
     return () => {
       trigger.kill();
       lenis?.destroy();
+      setLenis(null);
     };
   }, []);
 
