@@ -1,31 +1,6 @@
-import { useEffect, useRef } from "react";
-import { motion, animate, useInView } from "framer-motion";
-import { profile, stats } from "../data/content";
+import { motion } from "framer-motion";
+import { profile } from "../data/content";
 import SectionHeading from "./SectionHeading";
-import { prefersReducedMotion } from "../lib/motion";
-
-function Counter({ value, suffix }: { value: number; suffix: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
-
-  useEffect(() => {
-    if (!inView || !ref.current) return;
-    if (prefersReducedMotion()) {
-      ref.current.textContent = `${value}${suffix}`;
-      return;
-    }
-    const controls = animate(0, value, {
-      duration: 1.6,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => {
-        if (ref.current) ref.current.textContent = `${Math.round(v)}${suffix}`;
-      },
-    });
-    return () => controls.stop();
-  }, [inView, value, suffix]);
-
-  return <span ref={ref}>0{suffix}</span>;
-}
 
 export default function About() {
   return (
@@ -51,9 +26,9 @@ export default function About() {
                 <>
                   I'm a frontend developer with{" "}
                   <span className="font-semibold text-white">
-                    over a year of hands-on professional experience
+                    over two years of hands-on professional experience
                   </span>{" "}
-                  building scalable, production-ready web applications with{" "}
+                  building responsive, production-ready web applications with{" "}
                   <span className="font-semibold text-accent">React</span> and{" "}
                   <span className="font-semibold text-accent">Next.js</span>.
                 </>
@@ -79,25 +54,6 @@ export default function About() {
             className="relative aspect-square w-full rounded-3xl object-cover transition-transform duration-500 group-hover:scale-[1.02]"
           />
         </motion.div>
-      </div>
-
-      {/* Animated stats */}
-      <div className="mt-16 grid grid-cols-2 gap-4 sm:mt-20 lg:grid-cols-4 lg:gap-6">
-        {stats.map((stat, i) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 text-center shadow-lg shadow-black/20 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/10 sm:p-8"
-          >
-            <div className="font-display text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-              <Counter value={stat.value} suffix={stat.suffix} />
-            </div>
-            <p className="mt-3 text-sm font-medium text-white/50 sm:text-base">{stat.label}</p>
-          </motion.div>
-        ))}
       </div>
     </section>
   );

@@ -9,9 +9,9 @@ export const profile = {
   tagline:
     "I build fast, beautiful, and functional web experiences with React, Next.js and TypeScript.",
   bio: [
-    "I'm a frontend developer with over a year of hands-on professional experience building scalable, production-ready web applications with React and Next.js.",
-    "I work daily with TypeScript, REST API integration and component-based architecture, collaborating with UI/UX designers and backend engineers to ship features on schedule. I care about the details — clean code, smooth performance, and interfaces that feel effortless to use.",
-    "When I'm not coding, I'm exploring new technologies, building personal projects, and sharing knowledge with the developer community.",
+    "I'm a frontend developer with over two years of hands-on professional experience building responsive, production-ready web applications with React and Next.js.",
+    "Since July 2024 I've been a Frontend Developer at Baseline Net Pvt. Ltd., where I build responsive, interactive interfaces and reusable UI components, integrate REST APIs, troubleshoot technical issues, and optimize application performance. I work closely with my team to deliver new features and improve the user experience of existing systems — and I care about the details: clean code, smooth performance, and interfaces that feel effortless to use.",
+    "I'm a quick learner who adapts easily to new technologies, tools, and changing requirements. When I'm not coding, I'm exploring new technologies, building personal projects, and sharing knowledge with the developer community.",
   ],
   email: "udgamadhikari26@gmail.com",
   phone: "+977 9841164256",
@@ -57,19 +57,6 @@ export const skillGroups: SkillGroup[] = [
       "UI/UX Principles",
     ],
   },
-];
-
-export interface Stat {
-  value: number;
-  suffix: string;
-  label: string;
-}
-
-export const stats: Stat[] = [
-  { value: 1, suffix: "+", label: "Years of Experience" },
-  { value: 20, suffix: "+", label: "React Components Shipped" },
-  { value: 10, suffix: "+", label: "Projects Built" },
-  { value: 2, suffix: "", label: "Companies Worked With" },
 ];
 
 export interface Project {
@@ -151,19 +138,11 @@ export interface TimelineItem {
 
 export const timeline: TimelineItem[] = [
   {
-    period: "April 2026 — Present",
+    period: "July 2024 — Present",
     title: "Frontend Developer",
-    place: "Autonomous Technology · Kathmandu, Nepal",
+    place: "Baseline Net Pvt. Ltd.",
     description:
-      "Engineered and maintained 20+ reusable React components integrated with REST APIs. Collaborated with UI/UX designers and backend engineers to ship features across multiple production releases, optimizing re-renders and lazy loading for faster page loads.",
-    type: "work",
-  },
-  {
-    period: "2025",
-    title: "Frontend Developer",
-    place: "Muktinath iTech · Kathmandu, Nepal",
-    description:
-      "Built and maintained web applications with a development team — component development, UI improvements, and codebase reviews under senior developer mentorship, using Git-based workflows in a production environment.",
+      "Contribute to software development projects by building responsive, user-friendly web interfaces and reusable UI components, integrating REST APIs, resolving technical issues, and optimizing application performance. Collaborate with the team to deliver new features and improve existing systems, adapting quickly to new technologies and changing project requirements.",
     type: "work",
   },
   {
