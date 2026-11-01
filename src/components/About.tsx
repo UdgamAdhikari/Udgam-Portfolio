@@ -24,11 +24,11 @@ export default function About() {
             >
               {i === 0 ? (
                 <>
-                  I'm a frontend developer with{" "}
+                  I'm a frontend developer specializing in building{" "}
                   <span className="font-semibold text-white">
-                    over two years of hands-on professional experience
+                    responsive, production-ready web applications
                   </span>{" "}
-                  building responsive, production-ready web applications with{" "}
+                  with{" "}
                   <span className="font-semibold text-accent">React</span> and{" "}
                   <span className="font-semibold text-accent">Next.js</span>.
                 </>

@@ -9,7 +9,7 @@ export const profile = {
   tagline:
     "I build fast, beautiful, and functional web experiences with React, Next.js and TypeScript.",
   bio: [
-    "I'm a frontend developer with over two years of hands-on professional experience building responsive, production-ready web applications with React and Next.js.",
+    "I'm a frontend developer specializing in building responsive, production-ready web applications with React and Next.js.",
     "Since July 2024 I've been a Frontend Developer at Baseline Net Pvt. Ltd., where I build responsive, interactive interfaces and reusable UI components, integrate REST APIs, troubleshoot technical issues, and optimize application performance. I work closely with my team to deliver new features and improve the user experience of existing systems — and I care about the details: clean code, smooth performance, and interfaces that feel effortless to use.",
     "I'm a quick learner who adapts easily to new technologies, tools, and changing requirements. When I'm not coding, I'm exploring new technologies, building personal projects, and sharing knowledge with the developer community.",
   ],
@@ -71,21 +71,19 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Pharmacy Management System",
+    title: "Garud Security",
     description:
-      "A real-world pharmacy management system with role-based access, inventory management, medicine catalog workflows, dashboard analytics, and scalable API integration.",
-    image: "/image copy.png",
-    technologies: ["Next.js", "TypeScript", "React Query", "Tailwind CSS", "Shadcn UI"],
-    githubUrl: "https://github.com/UdgamAdhikari",
-    featured: true,
-  },
-  {
-    title: "Mobile Inventory Management System",
-    description:
-      "An inventory platform for mobile phone businesses — product management, stock tracking, purchase & sales workflows, supplier and customer management, and role-based access control.",
-    image: "/mobile.png",
-    technologies: ["Next.js", "TypeScript", "React Query", "Tailwind CSS", "Shadcn UI"],
-    githubUrl: "https://github.com/UdgamAdhikari",
+      "Enterprise security operations and management platform where I focused on comprehensive system testing, API validation, and performance enhancement. Benchmarked application bottlenecks, optimized query response times and data-fetching latency, and conducted rigorous regression and load testing to ensure high reliability and operational uptime.",
+    image: "/garud.jpg",
+    technologies: [
+      "Performance Optimization",
+      "API Testing",
+      "Load & Stress Testing",
+      "Postman",
+      "System Benchmarking",
+      "Quality Assurance",
+    ],
+    liveUrl: "https://garudsecurities.com.np",
     featured: true,
   },
   {
@@ -95,6 +93,15 @@ export const projects: Project[] = [
     image: "/heart.png",
     technologies: ["React", "Flask", "Python", "HTML", "CSS"],
     githubUrl: "https://github.com/UdgamAdhikari/Heart-Diseases-System",
+    featured: true,
+  },
+  {
+    title: "Admin Dashboard",
+    description:
+      "A responsive admin dashboard with rich functional features built on Shadcn components.",
+    image: "/image.png",
+    technologies: ["React", "Tailwind CSS", "JavaScript", "Shadcn UI"],
+    githubUrl: "https://github.com/UdgamAdhikari/AdminDashboard",
     featured: true,
   },
   {
@@ -115,15 +122,6 @@ export const projects: Project[] = [
       "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80",
     technologies: ["React", "REST API", "JavaScript"],
     githubUrl: "https://github.com/UdgamAdhikari",
-    featured: false,
-  },
-  {
-    title: "Admin Dashboard",
-    description:
-      "A responsive admin dashboard with rich functional features built on Shadcn components.",
-    image: "/image.png",
-    technologies: ["React", "Tailwind CSS", "JavaScript", "Shadcn UI"],
-    githubUrl: "https://github.com/UdgamAdhikari/AdminDashboard",
     featured: false,
   },
 ];
