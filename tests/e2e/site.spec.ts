@@ -7,7 +7,7 @@ test.describe("home", () => {
     page.on("pageerror", (err) => errors.push(err.message));
 
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Udgam Adhikari.");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(/^Udgam Adhikari/);
     await expect(page.getByRole("link", { name: /See selected work/ })).toHaveAttribute("href", "#work");
     for (const id of ["parts", "about", "services", "assembly", "stack", "work", "contact"]) {
       await expect(page.locator(`section#${id}`)).toBeAttached();

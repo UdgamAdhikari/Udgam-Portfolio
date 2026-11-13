@@ -175,8 +175,18 @@ export default function Assembly() {
             >
               {pad(shown)}
             </span>
+            {/* Caption: says in words what the model is showing right now. */}
+            <div
+              key={`cap-${shown}`}
+              className="pointer-events-none absolute bottom-2 left-0 z-10 max-w-sm animate-[booking-in_0.5s_var(--ease-settle)] border-l-2 border-signal pl-4 max-lg:hidden"
+            >
+              <p className="label text-signal">Now showing · {pad(shown)}</p>
+              <p className="mt-1.5 font-display text-2xl leading-tight font-[620] [font-variation-settings:'wdth'_104]">{current.caption[0]}</p>
+              <p className="mt-1 text-base leading-snug text-muted">{current.caption[1]}</p>
+            </div>
             <ProcessStage
               state={{ stage, spin }}
+              stageIndex={shown}
               fallback={<ProcessVisual step={shown} done={shown === COUNT - 1} />}
             />
           </div>

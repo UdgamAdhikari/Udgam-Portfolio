@@ -64,18 +64,19 @@ export const STAGES: StageConfig[] = [
     guides: 0,
     ship: 0,
   },
-  // 02 Break down — an exploded view: each module pulled out along its own axis.
+  // 02 Break down — a clear plan: every part laid out flat, spread apart on
+  // the grid so each one can be seen and named. Nothing tumbles.
   {
     pieces: {
-      header: still([0, 1.6, -1.6], [0.35, 0, 0]),
-      sidebar: still([-1.9, 1.1, 0], [0, 0, 0.35]),
-      cardA: still([-0.6, 2.3, -0.3], [0.12, 0.35, 0]),
-      cardB: still([1.2, 2.0, -0.9], [0, -0.45, 0.12]),
-      list: still([0, 1.0, 1.9], [-0.3, 0, 0]),
-      button: still([1.7, 1.6, 1.3], [0, 0.7, 0]),
+      header: still([0, 0.3, -0.7]),
+      sidebar: still([-0.7, 0.3, 0]),
+      cardA: still([-0.15, 0.3, -0.25]),
+      cardB: still([0.55, 0.3, -0.25]),
+      list: still([0.35, 0.3, 0.35]),
+      button: still([0.55, 0.3, 0.9]),
     },
-    camera: [8, 7.2, 9.2],
-    yaw: -0.5,
+    camera: [3.2, 9.4, 7.6],
+    yaw: -0.15,
     annotations: 0,
     connectors: 0,
     guides: 0,

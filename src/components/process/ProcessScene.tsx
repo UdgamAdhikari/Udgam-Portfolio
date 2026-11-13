@@ -9,6 +9,8 @@ import { useEffect, useMemo, useRef, type RefObject } from "react";
 import * as THREE from "three";
 import { getControls, type Theme } from "@/lib/controls";
 import { PIECES, PLATE, STAGES, type PieceSpec } from "./stages";
+import StageProps from "./StageProps";
+import Label from "./Label";
 
 // ── Materials ────────────────────────────────────────────────────
 // Matte ceramic in the site's two inks; the theme re-glazes them in place.
@@ -40,13 +42,23 @@ function useMaterials(): Materials {
 }
 
 const damp = THREE.MathUtils.damp;
-const smoothing = () => (getControls().motion === 0 ? 40 : 4.2);
+const smoothing = () => (getControls().motion === 0 ? 40 : 18);
 
 interface SceneState {
   stage: RefObject<number>;
   /** Pointer-driven extra rotation, in radians (already clamped). */
   spin: RefObject<{ x: number; y: number }>;
 }
+
+// Plain names for each module, shown on it during Break down.
+const PLAIN: Record<string, string> = {
+  header: "Top bar",
+  sidebar: "Menu",
+  cardA: "Highlights",
+  cardB: "Stats",
+  list: "Your content",
+  button: "Call to action",
+};
 
 // ── One module of the product ────────────────────────────────────
 
@@ -63,7 +75,7 @@ function Piece({ spec, index, mats, state }: { spec: PieceSpec; index: number; m
     const t = clock.elapsedTime;
     if (stage !== last.current.stage) last.current = { stage, at: t };
     // Stagger: each piece starts a beat after the one before, so moves read as a sequence.
-    if (getControls().motion > 0 && t - last.current.at < index * 0.07) return;
+    if (getControls().motion > 0 && t - last.current.at < index * 0.015) return;
 
     const config = STAGES[stage]!;
     const pose = config.pieces[spec.id];
@@ -91,6 +103,7 @@ function Piece({ spec, index, mats, state }: { spec: PieceSpec; index: number; m
     <>
       <group ref={group} position={[spec.home[0], spec.home[1] + 2, spec.home[2]]}>
         <RoundedBox args={spec.size} radius={0.05} smoothness={4} material={material} castShadow />
+        <Label text={PLAIN[spec.id]!} position={[0, 0.45, 0]} show={() => state.stage.current === 1} />
         {/* Surface detail, so each module reads as a UI part. */}
         {spec.id === "list" &&
           [-0.28, 0, 0.28].map((z, i) => (
@@ -135,7 +148,7 @@ function Piece({ spec, index, mats, state }: { spec: PieceSpec; index: number; m
   );
 }
 
-function Assembly({ state }: { state: SceneState }) {
+function Assembly({ state, stageIndex }: { state: SceneState; stageIndex: number }) {
   const mats = useMaterials();
   const root = useRef<THREE.Group>(null);
   const edge = useRef<THREE.MeshBasicMaterial>(null);
@@ -151,7 +164,7 @@ function Assembly({ state }: { state: SceneState }) {
     const config = STAGES[stage]!;
     const { theme, motion } = getControls();
     const k = smoothing();
-    const kc = motion === 0 ? 40 : 2.8;
+    const kc = motion === 0 ? 40 : 12;
 
     // Camera glides between framings (a little slower than the pieces).
     const cam = frame.camera;
@@ -199,6 +212,7 @@ function Assembly({ state }: { state: SceneState }) {
         <Piece key={spec.id} spec={spec} index={i} mats={mats} state={state} />
       ))}
       <GuidesLayer material={guide} />
+      <StageProps stage={stageIndex} />
     </group>
   );
 }
@@ -229,7 +243,7 @@ function GuidesLayer({ material }: { material: THREE.MeshBasicMaterial }) {
   );
 }
 
-export default function ProcessScene({ active, state }: { active: boolean; state: SceneState }) {
+export default function ProcessScene({ active, state, stageIndex }: { active: boolean; state: SceneState; stageIndex: number }) {
   return (
     <Canvas
       dpr={[1, 1.75]}
@@ -239,7 +253,7 @@ export default function ProcessScene({ active, state }: { active: boolean; state
     >
       <hemisphereLight args={["#ffffff", "#d9d3c7", 1.2]} />
       <directionalLight position={[4, 9, 6]} intensity={2.1} />
-      <Assembly state={state} />
+      <Assembly state={state} stageIndex={stageIndex} />
       <ContactShadows position={[0, -0.25, 0]} scale={14} blur={2.6} opacity={0.32} far={4} resolution={512} />
     </Canvas>
   );

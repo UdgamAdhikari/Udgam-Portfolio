@@ -7,6 +7,7 @@ import Stack from "@/components/sections/Stack";
 import Work from "@/components/sections/Work";
 import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
+import Intro from "@/components/intro/Intro";
 import { getSite } from "@/server/content/site";
 
 // Prerendered, then refreshed on demand when the dashboard changes content
@@ -31,13 +32,14 @@ export default async function Home() {
 
   return (
     <>
+      <Intro name={profile.name} role={profile.role} />
       <Header profile={profile} />
       <main id="main">
         <Hero hero={site.hero} profile={profile} />
         <About about={site.about} />
         <Services />
         <Assembly />
-        <Stack stack={site.stack} skillGroups={site.skillGroups} />
+        <Stack stack={site.stack} />
         <Work projects={site.projects} />
         <Contact contact={site.contact} profile={profile} />
       </main>

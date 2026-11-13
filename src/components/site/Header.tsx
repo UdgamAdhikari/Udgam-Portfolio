@@ -110,8 +110,7 @@ export default function Header({ home = true, profile }: { home?: boolean; profi
           onClick={onNameClick}
           className="font-display text-xl leading-none font-[680] tracking-[-0.01em] [font-variation-settings:'wdth'_112] lg:col-span-3"
         >
-          {profile.name}
-          <span className="text-signal">.</span>
+          <span className="text-signal">©</span> {profile.name}
         </a>
 
         <p className="label hidden leading-relaxed text-muted lg:col-span-4 lg:block">

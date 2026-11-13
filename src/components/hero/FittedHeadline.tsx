@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { getControls } from "@/lib/controls";
 
 const MIN_WDTH = 62;
 const MAX_WDTH = 125;
@@ -19,7 +18,6 @@ export default function FittedHeadline({ id, lines }: { id: string; lines: strin
     const heading = ref.current;
     if (!heading) return;
     const spans = Array.from(heading.querySelectorAll<HTMLSpanElement>("[data-line]"));
-    let first = true;
     let frame = 0;
 
     const widest = (wdth: number) => {
@@ -45,15 +43,7 @@ export default function FittedHeadline({ id, lines }: { id: string; lines: strin
       }
       const target = Math.floor(lo * 10) / 10;
 
-      // First fit: open from the narrowest cut to the fitted width.
-      const motion = getControls().motion;
-      if (first && motion > 0) {
-        heading.style.fontVariationSettings = `"wdth" ${MIN_WDTH}`;
-        void heading.offsetWidth;
-        heading.style.transition = `font-variation-settings ${1.3 * motion}s var(--ease-settle)`;
-      }
       heading.style.fontVariationSettings = `"wdth" ${target}`;
-      first = false;
     };
 
     const observer = new ResizeObserver(() => {
@@ -78,9 +68,17 @@ export default function FittedHeadline({ id, lines }: { id: string; lines: strin
       >
         {lines.map((line, i) => {
           const last = i === lines.length - 1 && line.endsWith(".");
+          const star = i === lines.length - 1 && line.endsWith("*");
           return (
             <span key={line} data-line className="pointer-events-auto block w-fit whitespace-nowrap">
-              {last ? (
+              {star ? (
+                <>
+                  {line.slice(0, -1)}
+                  <span aria-hidden="true" className="ml-[0.06em] inline-block align-top text-[0.32em] leading-none text-signal">
+                    ✦
+                  </span>
+                </>
+              ) : last ? (
                 <>
                   {line.slice(0, -1)}
                   <span className="text-signal">.</span>

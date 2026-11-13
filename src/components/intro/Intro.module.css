@@ -1,0 +1,166 @@
+/*
+ * Opening screen, in greys whatever the theme, on one even charcoal-grey
+ * surface: the name and "@Portfolio" are set letter by letter, a counter
+ * and line fill under them, then the screen splits open, top half up and
+ * bottom half down.
+ * The whole timeline is CSS, so it plays and gets out of the way even if
+ * JavaScript is slow; the script only drives the counter and removes it.
+ *
+ *   0.25s  letters rise in (staggered; "@Portfolio" from 0.55s)
+ *   0.10s  progress line fills (1.5s)
+ *   1.70s  contents fade (0.25s)
+ *   1.85s  the halves split apart (0.8s)
+ */
+
+.root {
+  --ink: #3c3c39;
+  --paper: #f2f1ed;
+  --dim: #b3b1aa;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  color: var(--paper);
+  /* Never blocks the page underneath, even while it is showing. */
+  pointer-events: none;
+}
+
+.half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50.5%;
+  background: var(--ink);
+  animation: 0.8s var(--ease-settle) 1.85s forwards;
+}
+
+.top {
+  top: 0;
+  animation-name: open-up;
+}
+
+.bottom {
+  bottom: 0;
+  animation-name: open-down;
+}
+
+.frame {
+  position: relative;
+  z-index: 1;
+  width: min(46rem, calc(100vw - 2rem));
+  animation: fade-out 0.25s ease 1.7s forwards;
+}
+
+.name {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 0.28em;
+  font-family: var(--font-display);
+  font-weight: 640;
+  font-variation-settings: "wdth" 108;
+  font-size: clamp(2.25rem, 7.5vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.word {
+  display: inline-flex;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+
+.char {
+  display: inline-block;
+  transform: translateY(105%);
+  animation: rise 0.7s var(--ease-settle) forwards;
+}
+
+.handle {
+  /* The site's orange signal colour, the one accent on the grey. */
+  color: #f0532f;
+}
+
+.meta {
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0;
+  animation: fade-in 0.4s ease 0.45s forwards;
+}
+
+.count {
+  font-variant-numeric: tabular-nums;
+  color: var(--paper);
+}
+
+.track {
+  position: relative;
+  margin-top: 0.75rem;
+  height: 1px;
+  background: rgb(242 241 237 / 0.18);
+}
+
+.bar {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: fill 1.5s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
+}
+
+@keyframes rise {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes open-up {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes open-down {
+  to {
+    transform: translateY(100%);
+  }
+}
+
+/* Still motion (the site's own switch, or the OS setting): no intro at all. */
+:global(:root[data-motion="0"]) .root {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    display: none;
+  }
+}

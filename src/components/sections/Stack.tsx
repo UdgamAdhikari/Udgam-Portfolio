@@ -1,28 +1,6 @@
 import type { CSSProperties } from "react";
 import { STACK_ICONS as ICONS } from "@/lib/stack-icons";
-import type { SkillGroup, StackItem } from "@/data/content";
-
-// Skill names (as written in skillGroups) → simple-icons slugs, where one exists.
-const SKILL_ICON: Record<string, string> = {
-  "JavaScript (ES6+)": "javascript",
-  TypeScript: "typescript",
-  HTML5: "html5",
-  CSS3: "css",
-  React: "react",
-  "Next.js": "nextdotjs",
-  "Tailwind CSS": "tailwindcss",
-  "shadcn/ui": "shadcnui",
-  "Node.js": "nodedotjs",
-  "Express.js (beginner)": "express",
-  "React Context API": "react",
-  PostgreSQL: "postgresql",
-  MongoDB: "mongodb",
-  "Git & GitHub": "github",
-  Docker: "docker",
-  Linux: "linux",
-  Vercel: "vercel",
-  Postman: "postman",
-};
+import type { StackItem } from "@/data/content";
 
 /** Brand colours too close to black or white vanish in one of the two themes; those stay in ink. */
 function hoverColour(hex: string) {
@@ -31,30 +9,36 @@ function hoverColour(hex: string) {
   return luminance > 0.08 && luminance < 0.85 ? `#${hex}` : undefined;
 }
 
+/**
+ * One logo in the carousel: the mark on its own, no box, with its name
+ * small underneath. Hovering brings up the brand colour. A tool without an
+ * official mark has its name set as type in the logo's place.
+ */
 function Tile({ item }: { item: StackItem }) {
   const icon = item.icon ? ICONS[item.icon] : undefined;
   const brand = icon && hoverColour(icon.hex);
   return (
     <li
-      className="group/tile grid size-32 shrink-0 place-items-center content-center gap-3 rounded-2xl border border-line bg-[color-mix(in_srgb,var(--fg)_5%,var(--bg))] transition-[translate,border-color] duration-300 hover:-translate-y-1 hover:border-[color-mix(in_srgb,var(--fg)_35%,transparent)] sm:size-40"
+      className="group/tile flex w-28 shrink-0 flex-col items-center gap-4 sm:w-40"
       style={brand ? ({ "--brand": brand } as CSSProperties) : undefined}
     >
-      {icon ? (
-        <svg
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          aria-hidden="true"
-          className="size-10 transition-colors duration-300 group-hover/tile:text-(--brand,var(--fg)) sm:size-12"
-        >
-          <path d={icon.path} />
-        </svg>
-      ) : (
-        // No official mark: the name is set as the logo.
-        <span aria-hidden="true" className="font-display text-2xl leading-none font-[660] [font-variation-settings:'wdth'_110] sm:text-3xl">
-          {item.name}
-        </span>
-      )}
-      {icon ? <span className="label text-muted">{item.name}</span> : <span className="sr-only">{item.name}</span>}
+      <span className="grid h-14 place-items-center transition-transform duration-300 group-hover/tile:-translate-y-1 sm:h-20">
+        {icon ? (
+          <svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            className="size-12 transition-colors duration-300 group-hover/tile:text-(--brand,var(--fg)) sm:size-16"
+          >
+            <path d={icon.path} />
+          </svg>
+        ) : (
+          <span aria-hidden="true" className="font-display text-2xl leading-none font-[660] [font-variation-settings:'wdth'_110] sm:text-3xl">
+            {item.name}
+          </span>
+        )}
+      </span>
+      <span className="label whitespace-nowrap text-muted transition-colors duration-300 group-hover/tile:text-fg">{item.name}</span>
     </li>
   );
 }
@@ -63,17 +47,17 @@ function Tile({ item }: { item: StackItem }) {
 function Row({ items, reverse, label }: { items: StackItem[]; reverse?: boolean; label?: string }) {
   return (
     <div
-      className="marquee overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_6%,#000_94%,transparent)]"
+      className="marquee overflow-hidden py-8 sm:py-10 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]"
       aria-hidden={label ? undefined : true}
       data-row={reverse ? "2" : "1"}
     >
       <div className="marquee-track flex w-max" data-reverse={reverse ? "" : undefined}>
-        <ul aria-label={label} className="flex gap-4 pr-4">
+        <ul aria-label={label} className="flex items-center">
           {items.map((item) => (
             <Tile key={item.name} item={item} />
           ))}
         </ul>
-        <ul aria-hidden="true" data-copy className="flex gap-4 pr-4">
+        <ul aria-hidden="true" data-copy className="flex items-center">
           {items.map((item) => (
             <Tile key={item.name} item={item} />
           ))}
@@ -83,7 +67,7 @@ function Row({ items, reverse, label }: { items: StackItem[]; reverse?: boolean;
   );
 }
 
-export default function Stack({ stack, skillGroups }: { stack: StackItem[]; skillGroups: SkillGroup[] }) {
+export default function Stack({ stack }: { stack: StackItem[] }) {
   // The second row starts halfway through the list, so the rows never line up.
   const half = Math.ceil(stack.length / 2);
   const shifted = [...stack.slice(half), ...stack.slice(0, half)];
@@ -105,46 +89,15 @@ export default function Stack({ stack, skillGroups }: { stack: StackItem[]; skil
         </p>
       </div>
 
-      <div data-part="Stack · carousel" className="mt-12 space-y-4 lg:mt-16">
+      <div
+        data-part="Stack · carousel"
+        className="mt-12 border-y border-line lg:mt-16"
+      >
         <Row items={stack} label="Technologies I use" />
+        <div className="border-t border-line" />
         <Row items={shifted} reverse />
       </div>
 
-      {/* The same toolkit, grouped: one card per area, skills as chips. */}
-      <div className="mt-16 px-4 sm:px-8 lg:mt-24 lg:px-12">
-        <h3 className="font-display text-[clamp(1.75rem,3vw,2.75rem)] leading-none font-[600] tracking-[-0.02em] [font-variation-settings:'wdth'_108]">
-          Grouped by what it&apos;s for
-        </h3>
-        <ul data-part="Spec sheet · cards" className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {skillGroups.map((group, i) => (
-            <li
-              key={group.title}
-              className="group flex flex-col rounded-3xl border border-line bg-[color-mix(in_srgb,var(--fg)_4%,var(--bg))] p-6 transition-[translate,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[color-mix(in_srgb,var(--fg)_30%,transparent)] hover:shadow-[0_24px_50px_-30px_rgb(0_0_0/0.45)]"
-            >
-              <div className="flex items-baseline justify-between">
-                <span className="label text-muted tabular-nums">( {String(i + 1).padStart(2, "0")} )</span>
-                <span className="label text-muted tabular-nums">{group.skills.length} skills</span>
-              </div>
-              <h4 className="mt-6 font-display text-2xl leading-tight font-[600] [font-variation-settings:'wdth'_104]">{group.title}</h4>
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {group.skills.map((skill) => {
-                  const icon = ICONS[SKILL_ICON[skill] ?? ""];
-                  return (
-                    <li key={skill} className="flex items-center gap-1.5 rounded-full border border-line bg-bg px-3 py-1.5 text-sm">
-                      {icon && (
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-3.5 text-muted">
-                          <path d={icon.path} />
-                        </svg>
-                      )}
-                      {skill}
-                    </li>
-                  );
-                })}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </div>
     </section>
   );
 }

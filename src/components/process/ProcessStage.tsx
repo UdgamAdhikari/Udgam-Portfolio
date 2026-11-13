@@ -26,7 +26,7 @@ const noSubscribe = () => () => {};
  * Hosts the Process Machine canvas: mounts it when the section approaches,
  * pauses rendering off-screen, and swaps in `fallback` without WebGL.
  */
-export default function ProcessStage({ state, fallback }: { state: SceneState; fallback: ReactNode }) {
+export default function ProcessStage({ state, stageIndex, fallback }: { state: SceneState; stageIndex: number; fallback: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -46,7 +46,7 @@ export default function ProcessStage({ state, fallback }: { state: SceneState; f
     <div ref={ref} className="absolute inset-0">
       {!supported ? fallback : mounted && (
         <WebGLBoundary fallback={fallback}>
-          <ProcessScene active={visible} state={state} />
+          <ProcessScene active={visible} state={state} stageIndex={stageIndex} />
         </WebGLBoundary>
       )}
     </div>

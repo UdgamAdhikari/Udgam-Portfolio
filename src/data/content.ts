@@ -38,7 +38,7 @@ export type SectionId = (typeof sections)[number]["id"];
 // The hero introduces the person first: the name is the headline, fitted to
 // the full column by the display face's width axis.
 export const hero = {
-  name: ["Udgam Adhikari."],
+  name: ["Udgam Adhikari*"],
   eyebrow: "Frontend Developer · Kathmandu",
   tagline: "Interfaces, built from parts that fit.",
   intro:
@@ -49,36 +49,42 @@ export const hero = {
 // assembles; the copy describes the day-to-day work the parts stand for.
 export const assembly = {
   title: "How I build",
-  lede: "Five stages. One evolving system.",
+  lede: "Five stages from your idea to a product people use.",
   hint: "Scroll, pick a stage, or drag the model",
   notes: [
     {
       part: "Understand",
-      title: "Read the brief",
-      body: "Who uses it, what they need to get done, and what the design and the existing APIs already give me.",
+      caption: ["Your goals come first", "I learn who your users are and what they need to get done."],
+      title: "We talk it through",
+      body: "You tell me what you need and who it's for. I ask questions until the goal is clear, so nothing gets built on a guess.",
     },
     {
       part: "Break down",
-      title: "Split it into parts",
-      body: "Screens become a short list of reusable components and clear interfaces, each small enough to build well.",
+      caption: ["A clear plan, piece by piece", "You see exactly what will be built before any of it is."],
+      title: "A clear plan",
+      body: "Your idea becomes a short list of screens and features, so you always know what's being built and why.",
     },
     {
       part: "Build",
-      title: "Connect real data",
-      body: "Typed React components wired to the API, with loading, empty and error states, not just the happy path.",
+      caption: ["It works with your real data", "Your content and information appear live, not placeholder text."],
+      title: "It comes to life",
+      body: "The pages are built and connected to your real data. It already works when there's slow internet or nothing to show yet.",
     },
     {
       part: "Refine",
-      title: "Make it exact",
-      body: "Every screen size checked, slow paths profiled, accessibility fixed. The details stop drifting.",
+      caption: ["Fast and easy on every screen", "Checked on phones, tablets and laptops, and usable by everyone."],
+      title: "Polished for everyone",
+      body: "I test it on every screen size, make it load fast, and make sure everyone can use it, including people using keyboards or screen readers.",
     },
     {
       part: "Ship",
-      title: "Ship and listen",
-      body: "Reviewed, merged and deployed. Then feedback from real use shapes the next pass.",
+      caption: ["Live for your users", "Launched, then improved based on what your users tell you."],
+      title: "Launch and grow",
+      body: "Your site goes live. I keep improving it based on how real people use it.",
     },
   ],
 };
+
 
 
 
